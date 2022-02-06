@@ -122,7 +122,7 @@ main .timer-container .timer-bar {
   background-color: #0ABDA2;
 }
 main .timer-container .timer-animation {
-  animation: timer 30s linear forwards;
+  animation: timer 180s linear forwards;
 }
 main .timer-container .paused {
   animation-play-state: paused;

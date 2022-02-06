@@ -11,7 +11,7 @@
 <body>
     <header>
         <h1>Jeu de mémoire</h1>
-        <button onclick="createScores()">Leaderboard</button>
+        <button onclick="leaderBoard.createScores()">Leaderboard</button>
     </header>
     <main>
         <div class="grid-container">
@@ -27,7 +27,7 @@
     </main>
 
     <!-- Modale des scores -->
-    <div class="leaderboard-modal" onclick="closeModal()">
+    <div class="leaderboard-modal" onclick="leaderBoard.closeModal()">
         <div class="leaderboard">
             <h1>Leaderboard</h1>
             <ol id="list-scores">

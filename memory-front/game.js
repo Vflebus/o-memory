@@ -1,3 +1,5 @@
+const apiUrl = 'http://localhost:3000/';
+
 const app = {
     nbRows: 4,
     nbCells: 9,
@@ -9,7 +11,6 @@ const app = {
     timerStart: 0,
     timerEnd: 0,
     timer: undefined,
-    apiUrl: 'http://localhost:3000/',
 
     createGrid: function() {
         const grid = document.getElementById('grid');
@@ -82,7 +83,7 @@ const app = {
             app.firstCell.removeEventListener('click', app.revealCard);
             app.secondCell.removeEventListener('click', app.revealCard);
             document.querySelector('#grid').style.pointerEvents = "auto";
-            if(app.score == 1){
+            if(app.score == 18){
                 app.gameWon();
             }
         } else {
@@ -103,7 +104,7 @@ const app = {
             cell.removeEventListener('click', app.startTimer);
         });
         document.querySelector('.timer-bar').classList.add('timer-animation');
-        app.timer = window.setTimeout(app.gameLost, 30000);
+        app.timer = window.setTimeout(app.gameLost, 180000);
         app.timerStart = Date.now();
     },
 
@@ -124,7 +125,7 @@ const app = {
         // Si un pseudo est entré, on envoie le temps et le pseudo en base de données avec fetch
         if (pseudo){
             const data = {name: pseudo, time: time}
-            await fetch(app.apiUrl, {
+            await fetch(apiUrl, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
@@ -140,3 +141,23 @@ const app = {
     }
 }
 app.init();
+
+const leaderBoard = {
+    list: document.getElementById('list-scores'),
+    
+    createScores: async () => {
+        const results = await fetch(apiUrl);
+        const scores = await results.json();
+        list.innerHTML = "";
+        scores.forEach(score => {
+            const li = document.createElement('li');
+            li.innerText = `${score.name}: ${score.time} secondes`
+            list.appendChild(li);
+        });
+        document.querySelector('.leaderboard-modal').style.display = "flex";
+    },
+    
+    closeModal: function() {
+        document.querySelector('.leaderboard-modal').style.display = "none";
+    }
+}
