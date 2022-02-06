@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Parisienne&display=swap");
+header {
+  width: 100%;
+  height: 15vh;
+  background-color: #FFB400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header h1 {
+  font-size: 40px;
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+}
+header button {
+  position: absolute;
+  right: 5vw;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main .grid-container {
+  margin: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .grid-container .line {
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  justify-content: space-around;
+}
+main .grid-container .line .cell {
+  height: 100px;
+  width: 100px;
+  background: #0ABDA2;
+  margin: 5px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .grid-container .line .cell .logo {
+  width: 70%;
+  height: auto;
+}
+main .grid-container .line .cell .hidden {
+  visibility: hidden;
+}
+main .grid-container .line .cell-reversed {
+  background: url(./assets/cards.png);
+}
+main .grid-container .line .banane {
+  background-position-y: -100px;
+}
+main .grid-container .line .orange {
+  background-position-y: -200px;
+}
+main .grid-container .line .citron-vert {
+  background-position-y: -300px;
+}
+main .grid-container .line .grenade {
+  background-position-y: -400px;
+}
+main .grid-container .line .abricot {
+  background-position-y: -500px;
+}
+main .grid-container .line .citron-jaune {
+  background-position-y: -600px;
+}
+main .grid-container .line .fraise {
+  background-position-y: -700px;
+}
+main .grid-container .line .pomme-verte {
+  background-position-y: -800px;
+}
+main .grid-container .line .peche {
+  background-position-y: -900px;
+}
+main .grid-container .line .raisin {
+  background-position-y: -1000px;
+}
+main .grid-container .line .pasteque {
+  background-position-y: -1100px;
+}
+main .grid-container .line .prune {
+  background-position-y: -1200px;
+}
+main .grid-container .line .poire {
+  background-position-y: -1300px;
+}
+main .grid-container .line .cerise {
+  background-position-y: -1400px;
+}
+main .grid-container .line .framboise {
+  background-position-y: -1500px;
+}
+main .grid-container .line .mangue {
+  background-position-y: -1600px;
+}
+main .grid-container .line .cerise-jaune {
+  background-position-y: -1700px;
+}
+main .timer-container {
+  width: 80vw;
+  height: 4vh;
+  background-color: #ccc;
+  border-radius: 2vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+main .timer-container .timer-bar {
+  height: 100%;
+  width: 100%;
+  border-radius: 2vh;
+  background-color: #0ABDA2;
+}
+main .timer-container .timer-animation {
+  animation: timer 30s linear forwards;
+}
+main .timer-container .paused {
+  animation-play-state: paused;
+}
+@keyframes timer {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+.leaderboard-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  display: none;
+}
+.leaderboard-modal h1 {
+  font-size: 30px;
+  font-family: "Noto Sans", sans-serif;
+}
+.leaderboard-modal .leaderboard {
+  width: 30%;
+  height: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: #FFB400 3px solid;
+  background-color: black;
+  color: white;
+}
+.leaderboard-modal .leaderboard ol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.leaderboard-modal .leaderboard li {
+  margin-bottom: 2vh;
+}
+
+/*# sourceMappingURL=style.css.map */
