@@ -140,7 +140,6 @@ const app = {
         });
     }
 }
-app.init();
 
 const leaderBoard = {
     list: document.getElementById('list-scores'),
@@ -148,11 +147,11 @@ const leaderBoard = {
     createScores: async () => {
         const results = await fetch(apiUrl);
         const scores = await results.json();
-        list.innerHTML = "";
+        leaderBoard.list.innerHTML = "";
         scores.forEach(score => {
             const li = document.createElement('li');
             li.innerText = `${score.name}: ${score.time} secondes`
-            list.appendChild(li);
+            leaderBoard.list.appendChild(li);
         });
         document.querySelector('.leaderboard-modal').style.display = "flex";
     },
@@ -161,3 +160,6 @@ const leaderBoard = {
         document.querySelector('.leaderboard-modal').style.display = "none";
     }
 }
+
+
+app.init();

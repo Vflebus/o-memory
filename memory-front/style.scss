@@ -149,13 +149,8 @@ main{
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
     display: none;
 
-    h1{
-        font-size: 30px;
-        font-family: 'Noto Sans', sans-serif;
-    }
     .leaderboard{
         width: 30%;
         height: 60%;
@@ -164,17 +159,30 @@ main{
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        border: #FFB400 3px solid;
-        background-color: black;
-        color: white;
+        border: #0ABDA2 3px solid;
+        background-color: white;
+        color: #0ABDA2;
         
-        ol{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
+        header{
+            background-color: #0ABDA2;
+
+            h1{
+                font-size: 30px;
+                font-family: 'Noto Sans', sans-serif;
+                text-transform: uppercase;
+            }
         }
-        li{
-            margin-bottom: 2vh;
+        main{
+            flex-grow: 1;
+            font-size: 1.3rem;
+            ol{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+            li{
+                margin-bottom: 2vh;
+            }
         }
     }
 }
