@@ -14,6 +14,7 @@ const app = {
 
     createGrid: function() {
         const grid = document.getElementById('grid');
+        grid.innerHTML = "";
 
         // On initialise un tableau qui permettra plus tard de s'assurer qu'un fruit n'est pas présent plus de deux fois dans notre grille. compteFruits[x] correspond au nombre de fois où fruits[x] a été placé dans la grille.
         const compteFruits = [];
@@ -138,6 +139,15 @@ const app = {
         document.querySelectorAll('.cell').forEach(cell => {
             cell.addEventListener('click', app.startTimer);
         });
+    },
+
+    restart: function() {
+        document.querySelector('.timer-bar').classList.remove('timer-animation');
+        clearTimeout(app.timer);
+        app.firstCell = '';
+        app.secondCell = '';
+        app.cardRevealed = false;
+        app.init();
     }
 }
 
