@@ -12,35 +12,35 @@ const app = {
     timerEnd: 0,
     timer: undefined,
 
-    createGrid: function() {
+    createGrid: function () {
         const grid = document.getElementById('grid');
         grid.innerHTML = "";
 
         // On initialise un tableau qui permettra plus tard de s'assurer qu'un fruit n'est pas présent plus de deux fois dans notre grille. compteFruits[x] correspond au nombre de fois où fruits[x] a été placé dans la grille.
         const compteFruits = [];
-        for (i=0; i<app.fruits.length; i++){
+        for (i = 0; i < app.fruits.length; i++) {
             // On ajoute à compteFruits autant de cases qu'il y a de fruits
             compteFruits.push(0);
         }
 
         // Notre grille est composée de plusieurs lignes contenant chacune plusieurs cases.
-        for (rowIndex=0; rowIndex<app.nbRows; rowIndex++){
+        for (rowIndex = 0; rowIndex < app.nbRows; rowIndex++) {
             const line = document.createElement('div');
             line.classList.add('line');
-            for(cellIndex=0; cellIndex<app.nbCells; cellIndex++){
+            for (cellIndex = 0; cellIndex < app.nbCells; cellIndex++) {
                 const cell = document.createElement('div');
                 cell.classList.add('cell');
 
                 let endLoop = false;
-                while (!endLoop){
+                while (!endLoop) {
                     // On choisit un fruit à assigner en piochant au hasard dans le tableau fruits. Si le fruit choisi a déjà été placé deux fois dans la grille, on en choisit un autre. 
 
                     // Renvoie un indice aléatoire du tableau
-                    const assignedFruit = Math.floor(Math.random() * app.fruits.length);
+                    const assignedFruitIndex = Math.floor(Math.random() * app.fruits.length);
 
-                    if(compteFruits[assignedFruit] < 2){ 
-                        cell.fruit = app.fruits[assignedFruit];
-                        compteFruits[assignedFruit]++;
+                    if (compteFruits[assignedFruitIndex] < 2) {
+                        cell.fruit = app.fruits[assignedFruitIndex];
+                        compteFruits[assignedFruitIndex]++;
                         endLoop = true;
                     }
                 }
@@ -58,16 +58,16 @@ const app = {
         }
     },
 
-    revealCard: function() {
+    revealCard: function () {
         // Dans ce contexte, this correspond à la cellule qui a appelé la fonction
         this.classList.toggle(this.fruit);
         this.classList.toggle('cell-reversed');
         this.querySelector('.logo').classList.toggle('hidden');
-        if(!app.cardRevealed){
+        if (!app.cardRevealed) {
             app.firstCell = this;
             app.cardRevealed = true;
         } else {
-            if(app.firstCell == this){
+            if (app.firstCell == this) {
                 app.firstCell = '';
             } else {
                 app.secondCell = this;
@@ -77,14 +77,14 @@ const app = {
         }
     },
 
-    compareFruits: function() {
+    compareFruits: function () {
         document.querySelector('#grid').style.pointerEvents = "none";
-        if(app.firstCell.fruit == app.secondCell.fruit){
+        if (app.firstCell.fruit == app.secondCell.fruit) {
             app.score++;
             app.firstCell.removeEventListener('click', app.revealCard);
             app.secondCell.removeEventListener('click', app.revealCard);
             document.querySelector('#grid').style.pointerEvents = "auto";
-            if(app.score == 18){
+            if (app.score == 18) {
                 app.gameWon();
             }
         } else {
@@ -100,7 +100,7 @@ const app = {
         }
     },
 
-    startTimer: function() {
+    startTimer: function () {
         document.querySelectorAll('.cell').forEach(cell => {
             cell.removeEventListener('click', app.startTimer);
         });
@@ -109,7 +109,7 @@ const app = {
         app.timerStart = Date.now();
     },
 
-    gameLost: function() {
+    gameLost: function () {
         window.alert("Et c'est perduuuuuu !");
         document.querySelectorAll('.cell').forEach(cell => {
             cell.removeEventListener('click', app.revealCard);
@@ -118,30 +118,30 @@ const app = {
 
     gameWon: async () => {
         app.timerEnd = Date.now();
-        const time = (app.timerEnd - app.timerStart)/1000;
+        const time = (app.timerEnd - app.timerStart) / 1000;
         document.querySelector('.timer-bar').classList.add('paused');
         clearTimeout(app.timer);
         let pseudo = window.prompt(`Vous avez gagné !!! temps: ${time} secondes ! Entrez votre pseudo pour le leaderboard !!`);
 
         // Si un pseudo est entré, on envoie le temps et le pseudo en base de données avec fetch
-        if (pseudo){
-            const data = {name: pseudo, time: time}
+        if (pseudo) {
+            const data = { name: pseudo, time: time }
             await fetch(apiUrl, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
         }
     },
 
-    init: function() {
+    init: function () {
         app.createGrid();
         document.querySelectorAll('.cell').forEach(cell => {
             cell.addEventListener('click', app.startTimer);
         });
     },
 
-    restart: function() {
+    restart: function () {
         document.querySelector('.timer-bar').classList.remove('timer-animation');
         clearTimeout(app.timer);
         app.firstCell = '';
@@ -153,7 +153,7 @@ const app = {
 
 const leaderBoard = {
     list: document.getElementById('list-scores'),
-    
+
     createScores: async () => {
         const results = await fetch(apiUrl);
         const scores = await results.json();
@@ -165,8 +165,8 @@ const leaderBoard = {
         });
         document.querySelector('.leaderboard-modal').style.display = "flex";
     },
-    
-    closeModal: function() {
+
+    closeModal: function () {
         document.querySelector('.leaderboard-modal').style.display = "none";
     }
 }
